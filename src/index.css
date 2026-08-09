@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* GoLore light theme — the original palette, untouched. */
+    --color-paper: 246 243 236; /* #F6F3EC */
+    --color-paper2: 239 234 220; /* #EFEADC */
+    --color-surface: 255 255 255; /* #FFFFFF — card/input surfaces */
+    --color-ink: 28 27 24; /* #1C1B18 */
+    --color-ink2: 58 56 51; /* #3A3833 */
+    --color-drift: 111 106 94; /* #6F6A5E */
+    --color-line: 221 214 196; /* #DDD6C4 */
+    --color-signal: 76 92 255; /* #4C5CFF */
+    --color-signal2: 122 135 255; /* #7A87FF */
+    --color-clay: 201 99 59; /* #C9633B */
+    --color-moss: 75 102 80; /* #4B6650 */
+    --color-sun: 227 166 47; /* #E3A62F */
+
+    color-scheme: light;
+  }
+
+  .dark {
+    /* GoLore dark theme — a warm, deliberate charcoal system, not an
+       inverted black-and-white. Neutrals shift; brand accents (signal,
+       clay, moss, sun) stay put so GoLore still feels like GoLore. */
+    --color-paper: 20 19 17; /* #141311 */
+    --color-paper2: 28 26 23; /* #1C1A17 */
+    --color-surface: 36 34 30; /* #24221E — cards sit a step above paper */
+    --color-ink: 237 233 224; /* #EDE9E0 — soft off-white, not pure white */
+    --color-ink2: 196 190 177; /* #C4BEB1 */
+    --color-drift: 142 136 122; /* #8E887A */
+    --color-line: 56 52 45; /* #38342D — subtle but visible */
+    --color-signal: 108 122 255; /* #6C7AFF — lifted slightly for AA contrast on dark */
+    --color-signal2: 148 159 255; /* #949FFF */
+    --color-clay: 224 128 90; /* #E0805A — lifted for dark-surface contrast */
+    --color-moss: 122 163 129; /* #7AA381 */
+    --color-sun: 235 186 88; /* #EBBA58 */
+
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-body antialiased transition-colors duration-300;
+    font-feature-settings: "ss01" on, "ss02" on;
+  }
+  ::selection {
+    background: #4c5cff;
+    color: #f6f3ec;
+  }
+  :focus-visible {
+    outline: 2px solid #4c5cff;
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-widey text-drift;
+  }
+  .section-pad {
+    @apply px-6 sm:px-10 lg:px-16;
+  }
+  .rule {
+    @apply border-t border-line;
+  }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
